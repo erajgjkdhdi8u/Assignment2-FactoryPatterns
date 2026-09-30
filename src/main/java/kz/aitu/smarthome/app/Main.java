@@ -15,7 +15,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("
-Available families: budget, premium, eco");
+Available families: budget, premium, eco, industrial");
         System.out.print("Choose smart home family: ");
         String family = scanner.nextLine();
 

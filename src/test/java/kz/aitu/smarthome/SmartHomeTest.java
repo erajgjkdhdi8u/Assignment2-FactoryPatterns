@@ -3,6 +3,7 @@ package kz.aitu.smarthome;
 import kz.aitu.smarthome.abstractfactory.BudgetFactory;
 import kz.aitu.smarthome.abstractfactory.EcoFactory;
 import kz.aitu.smarthome.abstractfactory.PremiumFactory;
+import kz.aitu.smarthome.abstractfactory.IndustrialFactory;
 import kz.aitu.smarthome.abstractfactory.SmartHomeFactory;
 import kz.aitu.smarthome.app.FactoryProvider;
 import kz.aitu.smarthome.client.SmartHomeController;
@@ -115,5 +116,24 @@ public class SmartHomeTest {
         SmartHomeFactory factory = new BudgetFactory();
         SmartHomeController controller = new SmartHomeController(factory);
         assertEquals("Budget", controller.getFamily());
+    }
+
+    @Test
+    void industrialFactoryCreatesIndustrialProducts() {
+        SmartHomeFactory factory = new IndustrialFactory();
+        assertEquals("Industrial", factory.createLight().getFamily());
+        assertEquals("Industrial", factory.createThermostat().getFamily());
+        assertEquals("Industrial", factory.createSecuritySystem().getFamily());
+    }
+
+    @Test
+    void industrialProductsAreCompatible() {
+        SmartHomeController controller = new SmartHomeController(new IndustrialFactory());
+        assertTrue(controller.productsAreCompatible());
+    }
+
+    @Test
+    void runtimeSelectionReturnsIndustrialFactory() {
+        assertEquals("Industrial", FactoryProvider.getFactory("industrial").getFamilyName());
     }
 }
