@@ -17,25 +17,25 @@ public class SmartHomeTest {
     @Test
     void budgetFactoryCreatesBudgetProducts() {
         SmartHomeFactory factory = new BudgetFactory();
-        assertEquals("Budget", factory.createLight().getFamily());
-        assertEquals("Budget", factory.createThermostat().getFamily());
-        assertEquals("Budget", factory.createSecuritySystem().getFamily());
+        assertEquals("BudgetLight", factory.createLight().getClass().getSimpleName());
+        assertEquals("BudgetThermostat", factory.createThermostat().getClass().getSimpleName());
+        assertEquals("BudgetSecuritySystem", factory.createSecuritySystem().getClass().getSimpleName());
     }
 
     @Test
     void premiumFactoryCreatesPremiumProducts() {
         SmartHomeFactory factory = new PremiumFactory();
-        assertEquals("Premium", factory.createLight().getFamily());
-        assertEquals("Premium", factory.createThermostat().getFamily());
-        assertEquals("Premium", factory.createSecuritySystem().getFamily());
+        assertEquals("PremiumLight", factory.createLight().getClass().getSimpleName());
+        assertEquals("PremiumThermostat", factory.createThermostat().getClass().getSimpleName());
+        assertEquals("PremiumSecuritySystem", factory.createSecuritySystem().getClass().getSimpleName());
     }
 
     @Test
     void ecoFactoryCreatesEcoProducts() {
         SmartHomeFactory factory = new EcoFactory();
-        assertEquals("Eco", factory.createLight().getFamily());
-        assertEquals("Eco", factory.createThermostat().getFamily());
-        assertEquals("Eco", factory.createSecuritySystem().getFamily());
+        assertEquals("EcoLight", factory.createLight().getClass().getSimpleName());
+        assertEquals("EcoThermostat", factory.createThermostat().getClass().getSimpleName());
+        assertEquals("EcoSecuritySystem", factory.createSecuritySystem().getClass().getSimpleName());
     }
 
     @Test
@@ -121,9 +121,9 @@ public class SmartHomeTest {
     @Test
     void industrialFactoryCreatesIndustrialProducts() {
         SmartHomeFactory factory = new IndustrialFactory();
-        assertEquals("Industrial", factory.createLight().getFamily());
-        assertEquals("Industrial", factory.createThermostat().getFamily());
-        assertEquals("Industrial", factory.createSecuritySystem().getFamily());
+        assertEquals("IndustrialLight", factory.createLight().getClass().getSimpleName());
+        assertEquals("IndustrialThermostat", factory.createThermostat().getClass().getSimpleName());
+        assertEquals("IndustrialSecuritySystem", factory.createSecuritySystem().getClass().getSimpleName());
     }
 
     @Test
