@@ -14,8 +14,7 @@ public class Main {
         showFactoryMethodDemo();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("
-Available families: budget, premium, eco, industrial");
+        System.out.println("\nAvailable families: budget, premium, eco, industrial");
         System.out.print("Choose smart home family: ");
         String family = scanner.nextLine();
 
@@ -23,20 +22,16 @@ Available families: budget, premium, eco, industrial");
             SmartHomeFactory factory = FactoryProvider.getFactory(family);
             SmartHomeController controller = new SmartHomeController(factory);
 
-            System.out.println("
-Created family: " + controller.getFamily());
+            System.out.println("\nCreated family: " + controller.getFamily());
             System.out.println("Compatible products: " + controller.productsAreCompatible());
 
-            System.out.println("
-Morning mode:");
+            System.out.println("\nMorning mode:");
             System.out.println(controller.startMorningMode());
 
-            System.out.println("
-Leave home mode:");
+            System.out.println("\nLeave home mode:");
             System.out.println(controller.leaveHome());
 
-            System.out.println("
-Night mode:");
+            System.out.println("\nNight mode:");
             System.out.println(controller.startNightMode());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

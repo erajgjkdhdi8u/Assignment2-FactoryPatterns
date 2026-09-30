@@ -19,26 +19,20 @@ public class SmartHomeController {
     }
 
     public String startMorningMode() {
-        return light.turnOn(60) + "
-"
-                + thermostat.setTemperature(22) + "
-"
+        return light.turnOn(60) + "\n"
+                + thermostat.setTemperature(22) + "\n"
                 + securitySystem.disarm();
     }
 
     public String leaveHome() {
-        return light.turnOff() + "
-"
-                + thermostat.setTemperature(18) + "
-"
+        return light.turnOff() + "\n"
+                + thermostat.setTemperature(18) + "\n"
                 + securitySystem.arm();
     }
 
     public String startNightMode() {
-        return light.turnOn(20) + "
-"
-                + thermostat.setTemperature(19) + "
-"
+        return light.turnOn(20) + "\n"
+                + thermostat.setTemperature(19) + "\n"
                 + securitySystem.arm();
     }
 
