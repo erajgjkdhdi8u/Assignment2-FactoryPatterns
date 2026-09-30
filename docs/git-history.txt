@@ -1,9 +1,13 @@
-3041039 Initial domain model without factories
-fadc3c2 Add product abstractions
-795fdc2 Introduce Factory Method
-47964c1 Add Budget Premium and Eco product families
-9450a18 Introduce Abstract Factory and business controller
-6774e46 Add runtime factory selection and console app
-713716d Add tests and compatibility rules
-c727dae Add fourth Industrial product family
-e76adab Add documentation UML source and defense notes
+Key assignment development stages:
+
+1. Initial domain model without factories
+2. Add product abstractions
+3. Introduce Factory Method
+4. Add Budget Premium and Eco product families
+5. Introduce Abstract Factory and business controller
+6. Add runtime factory selection and console app
+7. Add tests and compatibility rules
+8. Add fourth Industrial product family
+
+The repository also contains later documentation and cleanup commits.
+Use `git log --oneline --reverse` to see the complete history.
