@@ -1,0 +1,102 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+
+package "Factory Method" {
+  interface Device
+  abstract class DeviceCreator {
+    + createDevice(): Device
+    + installAndCheckDevice(): String
+  }
+  class LightCreator
+  class ThermostatCreator
+  class SecurityCreator
+  class StandardLight
+  class StandardThermostat
+  class StandardSecuritySystem
+
+  DeviceCreator <|-- LightCreator
+  DeviceCreator <|-- ThermostatCreator
+  DeviceCreator <|-- SecurityCreator
+  LightCreator ..> StandardLight : creates
+  ThermostatCreator ..> StandardThermostat : creates
+  SecurityCreator ..> StandardSecuritySystem : creates
+}
+
+package "Products" {
+  interface Light
+  interface Thermostat
+  interface SecuritySystem
+  Device <|-- Light
+  Device <|-- Thermostat
+  Device <|-- SecuritySystem
+}
+
+package "Abstract Factory" {
+  interface SmartHomeFactory {
+    + createLight(): Light
+    + createThermostat(): Thermostat
+    + createSecuritySystem(): SecuritySystem
+  }
+  class BudgetFactory
+  class PremiumFactory
+  class EcoFactory
+  class IndustrialFactory
+  SmartHomeFactory <|.. BudgetFactory
+  SmartHomeFactory <|.. PremiumFactory
+  SmartHomeFactory <|.. EcoFactory
+  SmartHomeFactory <|.. IndustrialFactory
+}
+
+package "Concrete product families" {
+  class BudgetLight
+  class BudgetThermostat
+  class BudgetSecuritySystem
+  class PremiumLight
+  class PremiumThermostat
+  class PremiumSecuritySystem
+  class EcoLight
+  class EcoThermostat
+  class EcoSecuritySystem
+  class IndustrialLight
+  class IndustrialThermostat
+  class IndustrialSecuritySystem
+
+  Light <|.. BudgetLight
+  Thermostat <|.. BudgetThermostat
+  SecuritySystem <|.. BudgetSecuritySystem
+  Light <|.. PremiumLight
+  Thermostat <|.. PremiumThermostat
+  SecuritySystem <|.. PremiumSecuritySystem
+  Light <|.. EcoLight
+  Thermostat <|.. EcoThermostat
+  SecuritySystem <|.. EcoSecuritySystem
+  Light <|.. IndustrialLight
+  Thermostat <|.. IndustrialThermostat
+  SecuritySystem <|.. IndustrialSecuritySystem
+}
+
+BudgetFactory ..> BudgetLight : creates
+BudgetFactory ..> BudgetThermostat : creates
+BudgetFactory ..> BudgetSecuritySystem : creates
+PremiumFactory ..> PremiumLight : creates
+PremiumFactory ..> PremiumThermostat : creates
+PremiumFactory ..> PremiumSecuritySystem : creates
+EcoFactory ..> EcoLight : creates
+EcoFactory ..> EcoThermostat : creates
+EcoFactory ..> EcoSecuritySystem : creates
+IndustrialFactory ..> IndustrialLight : creates
+IndustrialFactory ..> IndustrialThermostat : creates
+IndustrialFactory ..> IndustrialSecuritySystem : creates
+
+class FactoryProvider
+class SmartHomeController
+class Main
+FactoryProvider ..> SmartHomeFactory : selects at runtime
+Main ..> FactoryProvider
+Main ..> SmartHomeController
+SmartHomeController --> SmartHomeFactory : receives
+SmartHomeController --> Light
+SmartHomeController --> Thermostat
+SmartHomeController --> SecuritySystem
+@enduml

@@ -1,0 +1,73 @@
+digraph UML {
+  graph [rankdir=LR, splines=ortho, nodesep=0.35, ranksep=0.55, pad=0.2, bgcolor="white"];
+  node [shape=record, fontname="DejaVu Sans", fontsize=10, margin="0.08,0.05"];
+  edge [fontname="DejaVu Sans", fontsize=8, arrowsize=0.7];
+
+  subgraph cluster_fm {
+    label="Factory Method"; style=rounded;
+    Device [label="{<<interface>> Device|getName()\lgetFamily()\lconnect()\lrunDiagnostic()\l}"];
+    DeviceCreator [label="{<<abstract>> DeviceCreator|+ createDevice(): Device\l+ installAndCheckDevice(): String\l}"];
+    LightCreator [label="LightCreator"];
+    ThermostatCreator [label="ThermostatCreator"];
+    SecurityCreator [label="SecurityCreator"];
+    StandardLight [label="StandardLight"];
+    StandardThermostat [label="StandardThermostat"];
+    StandardSecurity [label="StandardSecuritySystem"];
+    LightCreator -> DeviceCreator [arrowhead=empty];
+    ThermostatCreator -> DeviceCreator [arrowhead=empty];
+    SecurityCreator -> DeviceCreator [arrowhead=empty];
+    LightCreator -> StandardLight [style=dashed,label="creates"];
+    ThermostatCreator -> StandardThermostat [style=dashed,label="creates"];
+    SecurityCreator -> StandardSecurity [style=dashed,label="creates"];
+  }
+
+  subgraph cluster_products {
+    label="Product interfaces"; style=rounded;
+    Light [label="{<<interface>> Light|turnOn(brightness)\lturnOff()\l}"];
+    Thermostat [label="{<<interface>> Thermostat|setTemperature(value)\l}"];
+    Security [label="{<<interface>> SecuritySystem|arm()\ldisarm()\l}"];
+    Light -> Device [arrowhead=empty];
+    Thermostat -> Device [arrowhead=empty];
+    Security -> Device [arrowhead=empty];
+  }
+
+  subgraph cluster_af {
+    label="Abstract Factory"; style=rounded;
+    SmartHomeFactory [label="{<<interface>> SmartHomeFactory|createLight()\lcreateThermostat()\lcreateSecuritySystem()\lgetFamilyName()\l}"];
+    BudgetFactory [label="BudgetFactory"];
+    PremiumFactory [label="PremiumFactory"];
+    EcoFactory [label="EcoFactory"];
+    IndustrialFactory [label="IndustrialFactory"];
+    BudgetFactory -> SmartHomeFactory [arrowhead=empty,style=dashed];
+    PremiumFactory -> SmartHomeFactory [arrowhead=empty,style=dashed];
+    EcoFactory -> SmartHomeFactory [arrowhead=empty,style=dashed];
+    IndustrialFactory -> SmartHomeFactory [arrowhead=empty,style=dashed];
+  }
+
+  subgraph cluster_families {
+    label="Concrete product families"; style=rounded;
+    Budget [label="{Budget family|BudgetLight\lBudgetThermostat\lBudgetSecuritySystem\l}"];
+    Premium [label="{Premium family|PremiumLight\lPremiumThermostat\lPremiumSecuritySystem\l}"];
+    Eco [label="{Eco family|EcoLight\lEcoThermostat\lEcoSecuritySystem\l}"];
+    Industrial [label="{Industrial family|IndustrialLight\lIndustrialThermostat\lIndustrialSecuritySystem\l}"];
+  }
+
+  BudgetFactory -> Budget [style=dashed,label="creates"];
+  PremiumFactory -> Premium [style=dashed,label="creates"];
+  EcoFactory -> Eco [style=dashed,label="creates"];
+  IndustrialFactory -> Industrial [style=dashed,label="creates"];
+
+  Budget -> Light [style=dashed]; Budget -> Thermostat [style=dashed]; Budget -> Security [style=dashed];
+  Premium -> Light [style=dashed]; Premium -> Thermostat [style=dashed]; Premium -> Security [style=dashed];
+  Eco -> Light [style=dashed]; Eco -> Thermostat [style=dashed]; Eco -> Security [style=dashed];
+  Industrial -> Light [style=dashed]; Industrial -> Thermostat [style=dashed]; Industrial -> Security [style=dashed];
+
+  FactoryProvider [label="{FactoryProvider|+ getFactory(family): SmartHomeFactory\l}"];
+  Controller [label="{SmartHomeController|+ startMorningMode()\l+ leaveHome()\l+ startNightMode()\l+ productsAreCompatible()\l}"];
+  Main [label="Main"];
+  FactoryProvider -> SmartHomeFactory [style=dashed,label="selects"];
+  Main -> FactoryProvider [style=dashed];
+  Main -> Controller [style=dashed];
+  Controller -> SmartHomeFactory [label="one factory"];
+  Controller -> Light; Controller -> Thermostat; Controller -> Security;
+}
