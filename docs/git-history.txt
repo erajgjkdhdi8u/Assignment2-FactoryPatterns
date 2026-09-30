@@ -1,0 +1,9 @@
+3041039 Initial domain model without factories
+fadc3c2 Add product abstractions
+795fdc2 Introduce Factory Method
+47964c1 Add Budget Premium and Eco product families
+9450a18 Introduce Abstract Factory and business controller
+6774e46 Add runtime factory selection and console app
+713716d Add tests and compatibility rules
+c727dae Add fourth Industrial product family
+e76adab Add documentation UML source and defense notes
